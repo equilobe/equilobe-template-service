@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Equilobe",
+    "classifications": [ "WebApi" ],
+    "identity": "equilobe-template-service",
+    "name": "Equilobe Api Template",
+    "shortName": "equilobe-template-service",
+    "sourceName":"Equilobe.TemplateService",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    }
+  }
