@@ -1,4 +1,4 @@
-# Dotnet Api Template
+# Equilobe Template Service
 
 ## Installation
 
