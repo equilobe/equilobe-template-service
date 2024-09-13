@@ -1,4 +1,3 @@
-﻿using System;
 using AutoMapper;
 using Equilobe.TemplateService.Core.Common.Api;
 using Equilobe.TemplateService.Core.Common.Extensions;
@@ -13,7 +12,6 @@ namespace Equilobe.TemplateService.Core.Features.Users.GetUsers
         IRequest<IPage<GetUsersReadModel>>
     {
         public string? Text { get; set; }
-        public string? ExternalId { get; set; }
     }
 
     public class GetUsersQueryValidator : AbstractValidator<GetUsersQuery>
@@ -39,11 +37,6 @@ namespace Equilobe.TemplateService.Core.Features.Users.GetUsers
             var query = dbContext
                 .Users
                 .AsQueryable();
-
-            if (request.ExternalId is not null)
-            {
-                query = query.Where(u => u.ExternalId == request.ExternalId);
-            }
 
             if (request.Text is not null)
             {
