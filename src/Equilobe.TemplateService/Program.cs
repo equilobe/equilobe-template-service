@@ -1,4 +1,4 @@
-﻿using Equilobe.TemplateService.Startup.Extensions;
+using Equilobe.TemplateService.Startup.Extensions;
 using Equilobe.TemplateService.Swagger.Extensions;
 using Equilobe.TemplateService.Infrastructure.ExceptionHandling.Extensions;
 using Equilobe.TemplateService.Infrastructure.Services.Extensions;
@@ -10,7 +10,6 @@ using Equilobe.TemplateService.Authentication.Extensions;
 using Equilobe.TemplateService.Core.Features.Users.CreateUser;
 using Equilobe.TemplateService.Cors;
 using System.Reflection;
-
 
 var (builder, services, configuration) = WebApplication.CreateBuilder(args);
 var executingAssembly = Assembly.GetExecutingAssembly();

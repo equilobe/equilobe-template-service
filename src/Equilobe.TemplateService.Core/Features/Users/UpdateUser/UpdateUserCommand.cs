@@ -2,7 +2,6 @@ using AutoMapper;
 using Equilobe.TemplateService.Core.Common.Api;
 using Equilobe.TemplateService.Core.Common.Exceptions;
 using Equilobe.TemplateService.Core.Common.Interfaces;
-using Equilobe.TemplateService.Core.Models;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +16,6 @@ public class UpdateUserCommand : IRequest
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
     public string? ProfilePictureUrl { get; set; } = default!;
-
-    public class MappingProfile : Profile
-    {
-        public MappingProfile()
-        {
-            CreateMap<UpdateUserCommand, UserEntity>();
-        }
-    }
 }
 
 public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
@@ -46,7 +37,7 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 }
 
 public class UpdateUserCommandHandler(
-    IDbContext dbContext, 
+    IDbContext dbContext,
     IMapper mapper) : IRequestHandler<UpdateUserCommand>
 {
     private readonly IDbContext dbContext = dbContext;

@@ -1,8 +1,6 @@
-﻿using System;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Equilobe.TemplateService.Infrastructure.ExceptionHandling.Extensions;
 
@@ -12,12 +10,13 @@ public static class HttpContextExtensions
     {
         context.Response.ContentType = "application/problem+json";
         context.Response.StatusCode = details.Status ?? StatusCodes.Status500InternalServerError;
-        var settings = new JsonSerializerSettings
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
-        };
-        string serializedBody = JsonConvert.SerializeObject(details, settings);
 
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
+        string serializedBody = JsonSerializer.Serialize(details, options);
         await context.Response.WriteAsync(serializedBody);
     }
 }
