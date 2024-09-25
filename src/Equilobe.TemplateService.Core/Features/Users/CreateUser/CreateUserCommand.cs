@@ -41,7 +41,8 @@ namespace Equilobe.TemplateService.Core.Features.Users.CreateUser
         }
     }
 
-    public class CreateUserCommandHandler(IDbContext dbContext, IMapper mapper, IMediator mediator) : IRequestHandler<CreateUserCommand, long>
+    public class CreateUserCommandHandler(IDbContext dbContext, IMapper mapper, IMediator mediator) : 
+        IRequestHandler<CreateUserCommand, long>
     {
         private readonly IDbContext dbContext = dbContext;
         private readonly IMapper mapper = mapper;
@@ -49,7 +50,9 @@ namespace Equilobe.TemplateService.Core.Features.Users.CreateUser
 
         public async Task<long> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.ExternalId == request.ExternalId, cancellationToken: cancellationToken);
+            var existingUser = await dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.ExternalId == request.ExternalId, cancellationToken: cancellationToken);
 
             if (existingUser != null)
             {
