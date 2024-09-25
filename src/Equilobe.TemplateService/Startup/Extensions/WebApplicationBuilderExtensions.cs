@@ -1,4 +1,6 @@
-﻿namespace Equilobe.TemplateService.Startup.Extensions;
+﻿using Serilog;
+
+namespace Equilobe.TemplateService.Startup.Extensions;
 
 public static class WebApplicationBuilderExtensions
 {
@@ -11,5 +13,12 @@ public static class WebApplicationBuilderExtensions
         b = builder;
         services = builder.Services;
         configuration = builder.Configuration;
+    }
+
+    public static void AddSerilogLogging(this WebApplicationBuilder builder)
+    {
+        builder.Logging.ClearProviders();
+        builder.Logging.AddConsole();
+        builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
     }
 }

@@ -10,13 +10,13 @@ using Equilobe.TemplateService.Authentication.Extensions;
 using Equilobe.TemplateService.Core.Features.Users.CreateUser;
 using Equilobe.TemplateService.Cors;
 using System.Reflection;
+using Serilog;
 
 var (builder, services, configuration) = WebApplication.CreateBuilder(args);
 var executingAssembly = Assembly.GetExecutingAssembly();
 var coreAssembly = typeof(CreateUserCommand).Assembly;
 
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
+builder.AddSerilogLogging();
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -36,6 +36,7 @@ services.AddHttpContextAccessor();
 var (middleware, endpoints, app)
     = builder.Build();
 
+middleware.UseSerilogRequestLogging();
 middleware.UseCors(PolicyNames.AllowOrigin);
 middleware.UseSwagger();
 middleware.UseSwaggerUI();
